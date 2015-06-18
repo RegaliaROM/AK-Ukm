@@ -11,6 +11,22 @@ cat << CTAG
 					action:"live GPUFrequency"
 				}},
 			{ SPane:{
+				title:"Unused States:"
+			}},
+				{ SLiveLabel:{
+					refresh:0,
+					style:italic,
+					action:"live UnUsedGpu"
+			}},
+			{ SPane:{
+				title:"Time in States:"
+			}},
+				{ SLiveLabel:{
+					refresh:5000,
+					style:italic,
+					action:"live TimeGpu 0 4"
+				}},
+			{ SPane:{
 				title:"GPU Frequency Scaling",
 			}},
 				`if [ -f "\`sh $DEVICE DirGPUMinPwrLevel\`" ]; then
@@ -35,6 +51,14 @@ cat << CTAG
 						values:{
 							'\`sh $DEVICE GPUFrequencyList\`'
 						}
+				}},'
+					$BB echo '{ SButton:{
+						label:"Enable GPU Gaming Boost",
+						action:"gpuboost enable"
+				}},'
+					$BB echo '{ SButton:{
+						label:"Disable GPU Gaming Boost",
+						action:"gpuboost disable"
 				}},'
 				fi`
 			`if [ -f "\`sh $DEVICE DirGPUGovernor\`" ]; then
